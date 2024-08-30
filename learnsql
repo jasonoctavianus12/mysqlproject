@@ -1,0 +1,106 @@
+create database estadanaventura;
+
+use estadanaventura;
+
+--table customer
+
+create table customer (
+	fname varchar (100),
+    lname varchar (100),
+	mobile_phone varchar (100),
+	dob date,
+	account_id varchar (100),
+    occupation varchar (100),
+    constraint customer_fname_pk primary key (fname)
+);
+
+alter table customer add email varchar (100);
+
+describe customer;
+show tables;
+
+insert into customer (fname, lname, mobile_phone, dob, account_id, occupation, email)
+values ('bima', 'satria', '08080808',' 1990-12-04', 'a0001', 'staff', 'bima@gmail.com');
+
+insert into customer (fname, lname, mobile_phone, dob, account_id, occupation, email)
+values ('yohanes', 'handoko', '09090909', '1980-02-02', 'a0002', 'ceo', 'yohanes@gmail.com');
+
+insert into customer (fname, lname, mobile_phone, dob, account_id, occupation, email)
+values ('satria', 'hardiansal', '07070707', '1990-04-04', 'a0003', 'it', 'satria@gmail.com');
+
+insert into customer (fname, lname, mobile_phone, dob, account_id, occupation, email)
+values ('radit', 'rachim', '06060606', '1970-11-01', 'a0004', 'pilot', 'radit@gmail.com');
+
+insert into customer (fname, lname, mobile_phone, dob, account_id, occupation, email)
+values ('galih', 'imawan', '05050505', '1960-05-20', 'a0005', 'pelaut', 'galih@gmail.com');
+
+insert into customer (fname, lname, mobile_phone, dob, account_id, occupation, email)
+values ('wijang', 'wicaksana', '04040404', '1970-12-01', 'a0006', 'polisi', 'wijang@gmail.com');
+
+insert into customer (fname, lname, mobile_phone, dob, account_id, occupation, email)
+values ('david', 'felix', '03030303', '1960-06-01', 'a0007', 'manager', 'david@gmail.com');
+
+select * from customer
+where fname = 'bima' and occupation = 'staff';
+
+select * from customer
+where mobile_phone in ('03030303', '05050505');
+
+select * from customer
+where not mobile_phone = '08080808';
+
+
+create table branch (
+	branch_id varchar (100),
+	bname varchar (100),
+    bcity varchar (100),
+    BOH_name varchar (100),
+    account_id varchar (100)
+);
+
+describe branch;
+
+insert into branch (branch_id, bname, bcity, BOH_name, account_id)
+values ('B0001', 'mikro rangkas bitung', 'tangerang', 'felix', 'a0001');
+
+insert into branch (branch_id, bname, bcity, BOH_name, account_id)
+values ('B0002', 'mikro gorotalo', 'gorontalo', 'siti', 'a0002');
+
+insert into branch (branch_id, bname, bcity, BOH_name, account_id)
+values ('B0003', 'mikro ciracas', 'jakarta timus', 'budi', 'a0003');
+
+insert into branch (branch_id, bname, bcity, BOH_name, account_id)
+values ('B0004', 'mikro pamulang', 'tangerang', 'yogi', 'a0004');
+
+insert into branch (branch_id, bname, bcity, BOH_name, account_id)
+values ('B0005', 'ukm karawaci', 'tangerang', 'kotijdah', 'a0005');
+
+insert into branch (branch_id, bname, bcity, BOH_name, account_id)
+values ('B0006', 'mikro serpong', 'tangerang', 'tini', 'a0006');
+
+insert into branch (branch_id, bname, bcity, BOH_name, account_id)
+values ('B0007', 'mikro bandung', 'jawa barat', 'wicaksana', 'a0007');
+
+select * from branch
+where BOH_name = 'yogi';
+
+select * from branch
+where not BOH_name = 'wicaksana' and not BOH_name = 'tini';
+
+select * from branch
+where BOH_name in ('wicaksana', 'budi', 'yogi');
+
+select * from branch
+where BOH_name = 'wicakksana' and bcity = 'jawa barat';
+
+select fname, bname from customer inner join branch on customer.account_id = branch.account_id;
+
+select * from branch
+left join customer
+on branch.account_id = customer.account_id
+union
+select * from branch
+right join customer
+on branch.account_id = customer.account_id;
+
+
